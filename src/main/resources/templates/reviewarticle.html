@@ -1,0 +1,56 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="navbar::layout(~{::body})">
+<head>
+<meta charset="UTF-8" />
+<title>CoderGeek</title>
+</head>
+<body>
+	<div>
+		<div class="alert alert-success" role="alert" th:if="${#strings.equals(saved,'true')}">
+			Article Published
+		</div>
+		<div th:each="article:${allArticles}">
+			<div class="card w-75">
+				<div class="card-body">
+					<h5 class="card-title" th:text="${article.title}"></h5>
+					<p class="card-text" th:text="${article.topic}"></p>
+					<a th:href="@{/submitarticle} + '/' + ${article.id}"
+						class="btn btn-primary">Review Article</a> 
+					<a class="btn btn-danger" data-bs-toggle="modal"
+						data-bs-target="#exampleModal">Delete</a>
+
+					<div class="modal fade" id="exampleModal" tabindex="-1"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">...</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">Close</button>
+									<a th:href="@{/deletearticle} + '/' + ${article.id}"
+										class="btn btn-danger">Delete</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:if="${#lists.size(allArticles)} == 0" class="alert alert-danger" role="articleLeft">
+  		No articles found!
+	</div>
+	<script>
+		let articles = [[${allArticles}]];
+		if(articles.length == 0){
+			document.getElementById("articleLeft").innerHTML = "No available article for review";
+		} 
+	</script>
+</body>
+</html>

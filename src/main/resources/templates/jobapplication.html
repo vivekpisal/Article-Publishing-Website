@@ -1,0 +1,68 @@
+<!doctype html>
+<html xmlns:th="https://www.thymleaf.org"
+	th:replace="navbar::layout(~{::body})">
+<head>
+<meta charset="UTF-8" />
+<title></title>
+</head>
+<body>
+<style>
+	input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
+		{
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	
+	input[type="number"] {
+		-moz-appearance: textfield;
+	}
+</style>
+	<h1>Contact Us</h1>
+	<div class="alert alert-success" th:if="${#strings.equals(saved,'true')}" role="alert">
+  		Your data saved successfully!
+	</div>
+	<form th:action="@{/jobapp}" method="post" th:object="${application}">
+		<div class="row">
+			<div class="col">
+				<div class="mb-3">
+					<label for="username" class="form-label">First Name*</label> <input
+						type="text" class="form-control" th:field="*{firstName}" placeholder="First name"
+						aria-label="First name" required>
+				</div>
+			</div>
+			<div class="col">
+				<div class="mb-3">
+					<label for="email" class="form-label">Email*</label> <input
+						type="email" class="form-control" th:field="*{email}" placeholder="Email"
+						aria-label="Email" required>
+					<p th:if="${userAlreadyPresent} == true" style="color:red;">User Already Present</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="mb-3">
+					<label for="mobile" class="form-label">Mobile Number*</label> 
+					<input
+						type="number" class="form-control" placeholder="Mobile Number"
+						aria-label="Mobile number" th:field="*{mobileNumber}" maxlength="10" required>
+					<p th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}"></p>
+				</div>
+			</div>
+			<div class="col">
+				<div class="mb-3">
+					<label for="company" class="form-label">Company*</label> <input
+						type="text" class="form-control" th:field="*{company}" placeholder="Company"
+						aria-label="company" required>
+				</div>
+			</div>
+		</div>
+		<div class="mb-3">
+					<label for="Your Designation" class="form-label">Your Designation*</label> <input
+						type="text" class="form-control" placeholder="Your Designation"
+						aria-label="Your Designation" th:field="*{designation}" required>
+		</div>
+		<button type="submit" class="btn btn-success">Save</button>
+	</form>
+</body>
+</html>

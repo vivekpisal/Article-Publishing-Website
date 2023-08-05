@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymleaf.org"
+	th:replace="navbar::layout(~{::body})">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<div >
+	<div class="card w-50" th:each="job:${jobs}">
+		<div class="card-body"> 
+			<h5 class="card-title" th:text="${job.jobTitle}"></h5>
+			<p class="card-text" th:text="${job.companyName}"></p>
+			<p class="card-text" th:text="${job.jobType}"></p>
+			<a th:href="@{/view-applicants/} + ${job.id}" class="btn btn-primary">View Applicants</a>
+		</div>
+	</div>
+</div>
+</body>
+</html>

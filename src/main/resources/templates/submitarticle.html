@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="navbar::layout(~{::div})">
+<head>
+<title></title>
+</head>
+<body>
+	<div>
+	<form method="post" th:action="@{/submitarticle}" th:object=${article}>
+		<div class="col-md-3">
+			<label for="title" class="form-label">Title:</label>
+			<input class="form-control" th:classappend="${#fields.hasErrors('title')} ? 'is-invalid' :'' " th:field=*{title} aria-describedby="validationTitle"></input>
+			<div th:errorclass="invalid-feedback" id="validationTitle" th:if="${#fields.hasErrors('title')}" th:errors="*{title}" role="alert">
+	    	</div>
+    	</div>
+    	
+		<textarea id="summernote" class="form-control" th:classappend="${#fields.hasErrors('content')} ? 'is-invalid':''" th:field="*{content}" name="summernote"></textarea>
+		
+		<div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="invalid-feedback"> 			
+		</div>
+
+		<div class="col-md-3">
+		<label for="topic" class="form-label">Topic:</label>
+		<select class="form-select" id="topic" th:classappend="${#fields.hasErrors('topic')} ? 'is-invalid' :''" th:field="*{topic}" aria-label="Default select example">
+		  <option selected value=""></option>
+		  <option value="Python">Python</option>
+		  <option value="C++">C++</option>
+		  <option value="DBMS">DBMS</option>
+		  <option value="Java">Java</option>
+		</select>
+		<div th:errorclass="invalid-feedback" th:if="${#fields.hasErrors('topic')}" th:errors="*{topic}" ></div>
+		<button type="submit"  class="btn btn-outline-success">Submit For Review</button>
+		</div>
+	</form>
+	<script>
+	  $('#summernote').summernote({
+	    placeholder: 'Write Article',
+	    tabsize: 2,
+	    height: 360,
+	    toolbar: [
+	      ['style', ['style']],
+	      ['font', ['bold', 'underline', 'clear']],
+	      ['para', ['ul', 'ol', 'paragraph']],
+	      ['table', ['table']],
+	      ['insert', ['link', 'picture', 'video']],
+	      ['view', ['fullscreen', 'codeview', 'help']]
+	    ]
+	  });
+	</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="navbar::layout(~{::body})">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+</head>
+<body>
+<div th:if="${#strings.equals(userCreated,'true')}" class="alert alert-success" role="alert">
+  Account Created Successfully!
+</div>
+<div class="justify-content-center align-items-center col col-lg-4 col-md-3 offset-md-3">
+	<h2>Registration</h2>
+	<form th:action="@{/signup}" th:object="${user}" method="post">
+     <div class="mb-3">
+     	<label for="name" class="form-label">Name</label>
+        <input type="text" th:field="*{name}" class="form-control"
+               id="name" placeholder="Name"> 
+     	<label for="email" class="form-label">Email</label>
+        <input type="email" th:field="*{email}" class="form-control"
+               id="email" placeholder="Email"> 
+         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+               class="text-danger"></span>
+         <span th:if="${#strings.equals(userExists,'true')}" 
+               class="text-danger">UserName Already Exists</span>
+     </div>
+     <div class="mb-3">
+     	<label for="password" class="form-label">Password</label>
+         <input type="password" th:field="*{password}" class="form-control"
+                id="password" placeholder="Password">
+         <ul class="text-danger" th:each="error: ${#fields.errors('password')}">
+             <li th:each="message : ${error.split(',')}">
+                 <p class="error-message" th:text="${message}"></p>
+             </li>
+         </ul>
+     </div>
+     
+     <div class="mb-3">
+    	<label for="password1" class="form-label">Confirm Password</label>
+    	<input type="password" placeholder="Confirm Password" onChange="passwordValidation(this.value)" name="password1" id="password1" class="form-control">
+  	</div>
+  	
+  	<div th:if="${#strings.equals(passwordNotMatch,'true')}" class="text-danger">Password Must Be Same</div>
+
+     <div class="col-md-6 mt-5">
+         <input type="submit" class="btn btn-primary" value="Register">
+     </div>
+</form>
+<script>
+	function passwordValidation(val){
+		console.log(val);
+		let password = document.getElementById("password").value;
+		let password1 = document.getElementById("password1").value;
+		console.log(password1);
+		if(password == password1){
+			document.getElementById("passwordVal").innerHTML = "";
+		}else{
+			document.getElementById("passwordVal").innerHTML = "Password must match";
+		}
+	}
+</script>
+</div>
+</body>
+</html>

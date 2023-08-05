@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="navbar::layout(~{::body})">
+<head>
+<title></title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+<script src="sidebars.js"></script>
+</head>
+<body>
+	<button class="btn btn-primary" type="button"
+		data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+		aria-controls="offcanvasWithBothOptions"
+		th:if="${#strings.equals(articleFound,'true')}">All Articles
+	</button>
+
+
+
+	<div class="offcanvas offcanvas-start" data-bs-scroll="true"
+		tabindex="-1" id="offcanvasWithBothOptions"
+		aria-labelledby="offcanvasWithBothOptionsLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">All
+				Articles</h5>
+			<button type="button" class="btn-close text-reset"
+				data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<div class="list-group">
+				<div th:each="larticle:${allArticles}">
+					<a th:href="@{/publishedarticle/} + ${larticle.id}"
+						class="list-group-item list-group-item-action"
+						style="margin-top: 10;" aria-current="true">
+						<div class="d-flex w-100 justify-content-between">
+							<h6 class="mb-1" th:text="${larticle.title}"></h6>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:if="${#lists.size(allArticles)} == 0" class="alert alert-danger" role="articleLeft">
+  		No articles found!
+	</div>
+
+	<div class="col-9" th:if="${#strings.equals(articleFound,'true')}">
+		<h2 th:text="${article.title}"></h2>
+		<p th:utext="${article.content}"></p>
+	</div>
+
+
+</body>
+</html>

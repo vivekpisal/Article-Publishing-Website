@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymleaf.org"
+	th:replace="navbar::layout(~{::body})">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<form th:action="@{/applyjob/} + '' + ${id}" method="post"
+		 enctype="multipart/form-data">
+
+		<div class="mb-3">
+			<label for="qualification" class="form-label">Qualification*</label>
+			<input type="text" class="form-control"
+				name="qualification" id="qualification" placeholder="Qualification"
+				aria-label="Qualification" required>
+		</div>
+		<div class="mb-3">
+			<label for="experience" class="form-label">Experience*</label> <input
+				type="number" class="form-control"
+				name="experience" id="experience" min="0" placeholder="Experience"
+				aria-label="Experience" required>
+		</div>
+		<div class="mb-3">
+			<label for="resume" class="form-label">Resume*</label> <input
+				type="file" class="form-control" name="resume" id="resume" required>
+		</div>
+		<button type="submit" class="btn btn-outline-success">Apply</button>
+	</form>
+</body>
+</html>

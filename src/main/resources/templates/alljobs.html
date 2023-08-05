@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="navbar::layout(~{::body})">
+<head>
+<title></title>
+</head>
+<body>
+<div th:if="${#strings.equals(alreadyApplied,'true')}" class="alert alert-danger" role="alert">
+  Already applied to this job!
+</div>
+<div style="margin-top:5rem;margin-left:4rem;">
+	<h4>Get Hired with GFG</h4>
+	Your Next Career Move Starts Here!
+	<div>Connecting Talent with Opportunities Since 2020:</div>
+	<div>2500+ Companies | 10,000+ Jobs Offered | 20 LPA Avg Salary</div>
+	<a th:href="@{/jobapp}"><button type="button" class="btn btn-success">Hire with us</button></a>
+</div>
+
+	<div class="row justify-content-center" style="margin-top: 5rem;">
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+					data-bs-target="#home" type="button" role="tab"
+					aria-controls="home" aria-selected="true">Full-Time</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+					data-bs-target="#profile" type="button" role="tab"
+					aria-controls="profile" aria-selected="false">Internship</button>
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="home" role="tabpanel"
+				aria-labelledby="home-tab">
+				<div  class="row" style="margin-left:10rem;margin-top:3rem;">
+					<div th:each="job:${allJobs}" class="card" style="width: 18rem;">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${job.jobTitle}"></h5>
+						<p class="card-text" th:text="${job.location}"></p>
+						<a th:href="@{/applyjob/} + '' + ${job.id}" class="btn btn-primary">Apply</a>
+					</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="profile" role="tabpanel"
+				aria-labelledby="profile-tab">
+				<div  class="row" style="margin-left:10rem;margin-top:3rem;">
+					<div th:each="job:${allInternships}" class="card" style="width: 18rem;">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${job.jobTitle}"></h5>
+						<p class="card-text" th:text="${job.location}"></p>
+						<a th:href="@{/applyjob/} + '' + ${job.id}" class="btn btn-primary">Apply</a>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

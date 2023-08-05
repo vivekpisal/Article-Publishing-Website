@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymleaf.org"
+	th:replace="navbar::layout(~{::body})">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<div class="alert alert-danger" role="alert" th:if="${#strings.equals(found,'false')}">
+  Job Not Found
+</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Email</th>
+				<th scope="col">Qualification</th>
+				<th scope="col">Resume</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+			<tr th:each="applicant:${applications}">
+				<td th:text="${applicant.email}"></td>
+				<td th:text="${applicant.qualification}"></td>
+				<td><a target="_blank" th:href="@{/show-CV/} + ${applicant.id}">
+				<div class="btn btn-success">Resume</div></a></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>

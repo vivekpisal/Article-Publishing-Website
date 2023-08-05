@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymleaf.org" 
+	th:replace="navbar::layout(~{::body})">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<div th:if="${#strings.equals(createdJob,'true')}" class="alert alert-success" role="alert">
+  Job is created successfully!
+</div>
+<form style="margin-left:10px;" th:action="@{/createjob}" method="post" th:object="${job}" class="row g-3">
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Title*</label>
+    <input type="text" class="form-control" th:field="*{jobTitle}" name="title" id="title" required>
+  </div>
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Company*</label>
+    <input type="text" class="form-control" th:field="*{companyName}" name="companyName" id="company" required>
+  </div>
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Role*</label>
+    <input type="text" class="form-control" th:field="*{role}" name="role" id="role" required>
+  </div>
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Location*</label>
+    <input type="text" class="form-control" th:field="*{location}" name="location" id="location" required>
+  </div>
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Last Date*</label>
+    <input type="date" class="form-control" th:field="*{lastDate}" name="lastDate" id="lastDate" required>
+  </div>
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Salary*</label>
+    <input type="number" class="form-control" th:field="*{salary}" name="salary" id="salary" required>
+  </div>
+  
+  	<label for="inputEmail4" class="form-label">Job Type*</label>
+	<div class="form-check">
+	  <input th:field="*{jobType}" class="form-check-input" type="radio" value="Full-Time" name="jobType" id="flexRadioDefault1" required>
+	  <label class="form-check-label" for="flexRadioDefault1">
+	    Full-Time
+	  </label>
+	</div>
+	<div class="form-check">
+	  <input th:field="*{jobType}" class="form-check-input" value="Internship" type="radio" name="jobType" id="flexRadioDefault2" required>
+	  <label class="form-check-label" for="flexRadioDefault2">
+	    Internship
+	  </label>
+	</div>
+  
+  <textarea id="summernote" class="form-control" th:field="*{jobDescription}" name="summernote" required></textarea>
+		
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Post Job</button>
+  </div>
+</form>
+<script>
+  $('#summernote').summernote({
+    placeholder: 'Job Description',
+    tabsize: 2,
+    height: 300,
+    toolbar: [
+      ['style', ['style']],
+      ['font', ['bold', 'underline', 'clear']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['table', ['table']],
+      ['insert', ['link', 'picture', 'video']],
+      ['view', ['fullscreen', 'codeview', 'help']]
+    ]
+  });
+</script>
+</body>
+</html>

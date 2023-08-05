@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="navbar::layout(~{::body})">   
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<div class="justify-content-center align-items-center col col-lg-4">
+	<div class="list-group">
+	    <div th:each="larticle:${allArticles}">
+		  <a th:href="@{/article/} + ${larticle.id}" class="list-group-item list-group-item-action" style="margin-top:10;" aria-current="true">
+		    <div class="d-flex w-100 justify-content-between">
+		      <h6 class="mb-1" th:text="${larticle.title}"></h6>
+		    </div>
+		  </a>
+		</div>
+	</div>
+</div>
+</body>
+</html>

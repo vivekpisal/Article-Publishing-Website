@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymleaf.org"
+	th:replace="navbar::layout(~{::body})">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<div th:each="job:${jobApplications}">
+		<div class="card w-75">
+			<div class="card-body">
+				<h5 class="card-title" th:text="${job.designation}"></h5>
+				<h6 style="display:inline;">Mobile Number:-</h6>
+				<p class="card-text" th:text="${job.mobileNumber}"></p>
+				<h6 style="display:inline;">Email:-</h6>
+				<p class="card-text" th:text="${job.email}"></p>
+				<a th:href="@{/createuser/} + '' + ${job.id}" class="btn btn-primary">Create User</a>
+				<a th:href="@{/deleteuser/} + '' + ${job.id}" class="btn btn-danger">Delete User</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
